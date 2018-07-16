@@ -4,29 +4,34 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
 
-import { IsEmail, Length } from 'class-validator';
-import Expense from './Expense';
+import User from './User';
 
 @Entity()
-export default class User {
+export default class Expense {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
-  username: string;
-
-  @Column()
-  @Length(6)
-  password: string;
+  name: string;
 
   @Column({
-    unique: true,
+    enum: [
+      'FOOD',
+      'TRANSPORT',
+      'ENTERTAINMENT',
+      'TRAVEL',
+      'HEALTH CARE',
+      'UTILITIES',
+      'MISCELLANEOUS',
+    ],
   })
-  @IsEmail()
-  email: string;
+  category: string;
+
+  @Column()
+  amount: number;
 
   @CreateDateColumn({
     name: 'created_at',
@@ -40,6 +45,6 @@ export default class User {
   })
   updatedAt: Date;
 
-  @OneToMany((type) => Expense, (expense) => expense.user)
-  expenses: Expense[];
+  @ManyToOne((type) => User, (user) => user.expenses)
+  user: User;
 }

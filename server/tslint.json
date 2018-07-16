@@ -10,7 +10,8 @@
       "object-literal-sort-keys": false,
       "ordered-imports": false,
       "interface-name": false,
-      "quotemark": [true, "single"]
+      "quotemark": [true, "single"],
+      "max-line-length": [true, 120]
     },
     "rulesDirectory": []
   }

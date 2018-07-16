@@ -1,4 +1,3 @@
-/* eslint no-console: 0 */
 import { GraphQLServer } from 'graphql-yoga';
 
 const typeDefs = `
