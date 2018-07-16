@@ -1,3 +1,23 @@
+/* eslint no-console: 0 */
 import { GraphQLServer } from 'graphql-yoga';
 
-console.log(GraphQLServer);
+const typeDefs = `
+type Query {
+  description: String
+}
+`;
+
+const resolvers = {
+  Query: {
+    description: () => 'This is the API for a simple blogging application',
+  },
+};
+
+const server = new GraphQLServer({
+  typeDefs,
+  resolvers,
+});
+
+server.start(() =>
+  console.log('The server is running on http://localhost:4000')
+);
