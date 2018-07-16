@@ -1,0 +1,34 @@
+{
+  "name": "gastos-sql",
+  "version": "1.0.0",
+  "description": "Expense app with SQL database and GraphQL server",
+  "main": "index.js",
+  "scripts": {
+    "dev": "babel-watch server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rotimi-babalola/gastos-sql.git"
+  },
+  "keywords": [
+    "Expense",
+    "GraphQL"
+  ],
+  "author": "Rotimi Babalola",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rotimi-babalola/gastos-sql/issues"
+  },
+  "homepage": "https://github.com/rotimi-babalola/gastos-sql#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.14.12"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.6",
+    "babel-preset-env": "^1.7.0",
+    "babel-watch": "^2.0.7",
+    "eslint": "^5.1.0"
+  }
+}
