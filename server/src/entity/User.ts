@@ -6,9 +6,11 @@ import {
   UpdateDateColumn,
   OneToMany,
   BaseEntity,
+  BeforeInsert,
 } from 'typeorm';
 
 import { IsEmail, Length } from 'class-validator';
+import * as bcrypt from 'bcrypt';
 import Expense from './Expense';
 
 @Entity('Users')
@@ -23,9 +25,7 @@ export default class User extends BaseEntity {
   @Length(6)
   password: string;
 
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   @IsEmail()
   email: string;
 
@@ -43,4 +43,9 @@ export default class User extends BaseEntity {
 
   @OneToMany((type) => Expense, (expense) => expense.user)
   expenses: Expense[];
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+  }
 }
