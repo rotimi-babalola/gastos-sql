@@ -8,6 +8,16 @@ type User {
   # expenses: [Expense]!
 }
 
+input NewUserInput {
+  username: String!
+  password: String!
+  email: String!
+}
+
 type Query {
   getUsers: [User]!
+}
+
+type Mutation {
+  createUser(input: NewUserInput!): User!
 }

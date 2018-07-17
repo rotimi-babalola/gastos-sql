@@ -1,8 +1,6 @@
 import user from './user/user.index';
 import * as merge from 'lodash.merge';
 
-console.log(merge({}, user.resolvers));
-
 export default {
   typeDefs: [
     user.typeDefs,
@@ -11,7 +9,6 @@ export default {
   context: {
     models: {
       user: user.model.default,
-      bar: 'hello',
     },
   },
 };
