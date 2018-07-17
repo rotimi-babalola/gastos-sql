@@ -1,14 +1,17 @@
-import user from './user';
+import user from './user/user.index';
 import * as merge from 'lodash.merge';
+
+console.log(merge({}, user.resolvers));
 
 export default {
   typeDefs: [
     user.typeDefs,
-  ].join(''),
+  ].join(' '),
   resolvers: merge({}, user.resolvers),
   context: {
     models: {
-      user: user.model,
+      user: user.model.default,
+      bar: 'hello',
     },
   },
 };
