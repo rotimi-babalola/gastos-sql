@@ -5,13 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BaseEntity,
 } from 'typeorm';
 
 import { IsEmail, Length } from 'class-validator';
 import Expense from './Expense';
 
-@Entity()
-export default class User {
+@Entity('Users')
+export default class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 

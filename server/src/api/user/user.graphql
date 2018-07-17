@@ -1,0 +1,13 @@
+type User {
+  id: ID!
+  username: String!
+  password: String!
+  email: String!
+  createdAt: String!
+  updatedAt: String!
+  # expenses: [Expense]!
+}
+
+type Query {
+  getUsers: [User]!
+}

@@ -24,6 +24,7 @@
    "dependencies": {
       "class-validator": "^0.8.5",
       "graphql-yoga": "^1.14.12",
+      "lodash.merge": "^4.6.1",
       "pg": "^7.3.0",
       "reflect-metadata": "^0.1.10",
       "typeorm": "^0.2.7"
