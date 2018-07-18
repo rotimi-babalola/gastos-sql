@@ -1,0 +1,41 @@
+enum Category {
+  FOOD,
+  TRANSPORT,
+  ENTERTAINMENT,
+  TRAVEL,
+  HEALTH CARE,
+  UTILITIES,
+  MISCELLANEOUS
+}
+
+type Expense {
+  id: ID!
+  name: String!
+  category: Category
+  amount: Int!
+  expenseInfo: String!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
+}
+
+input ExpenseID {
+  id: ID!
+}
+
+input NewExpenseInput {
+  name: String!
+  category: Category
+  amount: Int!
+  expenseInfo: String!
+  userId: ID!
+}
+
+extend type Query {
+  getExpense(input: ExpenseID!): Expense!
+  # expenses(input: userID): [Expense]! 
+}
+
+extend type Mutation {
+  createExpense(input: NewExpenseInput!): Expense!
+}

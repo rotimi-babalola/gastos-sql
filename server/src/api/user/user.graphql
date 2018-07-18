@@ -4,7 +4,7 @@ type User {
   email: String!
   createdAt: String!
   updatedAt: String!
-  # expenses: [Expense]!
+  expenses: [Expense]!
 }
 
 input NewUserInput {
