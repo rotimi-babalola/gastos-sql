@@ -1,25 +1,25 @@
 import 'reflect-metadata';
-import {createConnection} from 'typeorm';
-import User from './entity/User';
+import { createConnection } from 'typeorm';
 import { server } from '../server';
 
-createConnection().then(async (connection) => {
+const serverOptions = {
+    port: 5000,
+    endpoint: '/graphql',
+    playground: '/docs',
+    tracing: true,
+    debug: true,
+};
 
-    console.log('Inserting a new user into the database...');
-    const user = new User();
-    user.username = 'Timber';
-    user.password = 'rotimi';
-    user.email = 'rotimi@gmail.com';
-    await connection.manager.save(user);
-    console.log('Saved a new user with id: ' + user.id);
+// createConnection().then(async (connection) => {
+//     console.log('Here you can setup and run express/koa/any other framework.');
+//     server.start(serverOptions, () => console.log('The server is running on http://localhost:5000'),
+// );
 
-    console.log('Loading users from the database...');
-    const users = await connection.manager.find(User);
-    console.log('Loaded users: ', users);
-
+// }).catch((error) => console.log(error));
+const startServer = () => {
+    server.start(serverOptions, () => console.log('The server is running on http://localhost:5000'));
+    createConnection();
     console.log('Here you can setup and run express/koa/any other framework.');
+};
 
-    server.start(() => console.log('The server is running on http://localhost:4000'),
-);
-
-}).catch((error) => console.log(error));
+startServer();

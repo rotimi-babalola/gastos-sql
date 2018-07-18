@@ -1,18 +1,4 @@
 import { GraphQLServer } from 'graphql-yoga';
+import gqlServerConfig from './src/api';
 
-const typeDefs = `
-type Query {
-  description: String
-}
-`;
-
-const resolvers = {
-  Query: {
-    description: () => 'This is the API for a simple blogging application',
-  },
-};
-
-export const server = new GraphQLServer({
-  typeDefs,
-  resolvers,
-});
+export const server = new GraphQLServer(gqlServerConfig);

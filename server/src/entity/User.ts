@@ -5,13 +5,16 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   OneToMany,
+  BaseEntity,
+  BeforeInsert,
 } from 'typeorm';
 
 import { IsEmail, Length } from 'class-validator';
+import * as bcrypt from 'bcrypt';
 import Expense from './Expense';
 
-@Entity()
-export default class User {
+@Entity('Users')
+export default class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
@@ -22,9 +25,7 @@ export default class User {
   @Length(6)
   password: string;
 
-  @Column({
-    unique: true,
-  })
+  @Column({ unique: true })
   @IsEmail()
   email: string;
 
@@ -42,4 +43,9 @@ export default class User {
 
   @OneToMany((type) => Expense, (expense) => expense.user)
   expenses: Expense[];
+
+  @BeforeInsert()
+  hashPassword() {
+    this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(10));
+  }
 }

@@ -9,7 +9,7 @@ import {
 
 import User from './User';
 
-@Entity()
+@Entity('Expenses')
 export default class Expense {
   @PrimaryGeneratedColumn('uuid')
   id: number;
