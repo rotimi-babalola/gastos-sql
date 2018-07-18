@@ -13,7 +13,12 @@ input NewUserInput {
   email: String!
 }
 
+input UserID {
+  id: ID
+}
+
 type Query {
+  getUser(input: UserID!): User!
   getUsers: [User]!
 }
 
