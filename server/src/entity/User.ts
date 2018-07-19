@@ -13,7 +13,7 @@ import { IsEmail, Length } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import Expense from './Expense';
 
-@Entity('Users')
+@Entity()
 export default class User extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;

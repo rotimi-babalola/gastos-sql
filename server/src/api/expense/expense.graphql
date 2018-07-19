@@ -33,7 +33,8 @@ input NewExpenseInput {
 
 extend type Query {
   getExpense(input: ExpenseID!): Expense!
-  # expenses(input: userID): [Expense]! 
+  # I'm not defining UserID because it has been defined in the user.graphql file
+  getUserExpenses(input: UserID!): [Expense]! 
 }
 
 extend type Mutation {

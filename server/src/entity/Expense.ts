@@ -10,7 +10,7 @@ import {
 
 import User from './User';
 
-@Entity('Expenses')
+@Entity()
 export default class Expense extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
@@ -29,6 +29,7 @@ export default class Expense extends BaseEntity {
       'UTILITIES',
       'MISCELLANEOUS',
     ],
+    default: 'MISCELLANEOUS',
   })
   category: string;
 

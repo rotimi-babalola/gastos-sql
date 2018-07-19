@@ -1,5 +1,4 @@
 const getExpense = async (_, { input }, ctx) => {
-  console.log(ctx.models, 'ctx');
   const expense = await ctx.models.expense.findOne(input.id);
   if (!expense) {
     throw new Error('Expense does not exist');
@@ -23,15 +22,31 @@ const createExpense = async (_, { input }, ctx) => {
   }
 };
 
+// get expenses for a user
+const getUserExpenses = async (_, { input }, ctx) => {
+  try {
+    const userExpenses = await ctx.models.expense.find({
+      user: input.id,
+    });
+    if (!userExpenses.length) {
+      throw new Error('Expenses for user not found');
+    }
+    return userExpenses;
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   Query: {
     getExpense,
+    getUserExpenses,
   },
   Mutation: {
     createExpense,
   },
   Expense: {
-    user: async (expense, _ , ctx) => {
+    user: async (expense, _, ctx) => {
       const expenseOwner = ctx.models.user.findOne(expense.userId);
       return expenseOwner;
     },

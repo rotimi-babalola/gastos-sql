@@ -14,7 +14,7 @@ input NewUserInput {
 }
 
 input UserID {
-  id: ID
+  id: ID!
 }
 
 type Query {
