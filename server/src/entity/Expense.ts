@@ -5,12 +5,13 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  BaseEntity,
 } from 'typeorm';
 
 import User from './User';
 
-@Entity('Expenses')
-export default class Expense {
+@Entity()
+export default class Expense extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
@@ -18,6 +19,7 @@ export default class Expense {
   name: string;
 
   @Column({
+    type: 'enum',
     enum: [
       'FOOD',
       'TRANSPORT',
@@ -27,11 +29,18 @@ export default class Expense {
       'UTILITIES',
       'MISCELLANEOUS',
     ],
+    default: 'MISCELLANEOUS',
   })
   category: string;
 
   @Column()
   amount: number;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  expenseInfo: string;
 
   @CreateDateColumn({
     name: 'created_at',
@@ -45,6 +54,8 @@ export default class Expense {
   })
   updatedAt: Date;
 
-  @ManyToOne((type) => User, (user) => user.expenses)
+  @ManyToOne((type) => User, (user) => user.expenses, {
+    nullable: false,
+  })
   user: User;
 }

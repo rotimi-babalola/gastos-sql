@@ -4,7 +4,7 @@ type User {
   email: String!
   createdAt: String!
   updatedAt: String!
-  # expenses: [Expense]!
+  expenses: [Expense]!
 }
 
 input NewUserInput {
@@ -14,7 +14,7 @@ input NewUserInput {
 }
 
 input UserID {
-  id: ID
+  id: ID!
 }
 
 type Query {

@@ -3,5 +3,3 @@ export default {
   typeDefs: require('../../utils/gqlLoader')('user/user.graphql'),
   model: require('../../entity/User'),
 };
-
-// export { resolvers } from './user.resolvers';
