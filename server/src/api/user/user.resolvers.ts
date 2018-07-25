@@ -1,5 +1,5 @@
 import { validate } from 'class-validator';
-import expenseIndex from '../expense/expense.index';
+import { verifyPassword, signToken } from '../../utils/login';
 
 const getUser = async (_, { input }, ctx) => {
   const user = await ctx.models.user.findOne(input.id);
@@ -30,6 +30,27 @@ const signUp = async (_, { input }, ctx) => {
   }
 };
 
+const login = async (_, { input }, ctx) => {
+  try {
+    const user = await ctx.models.user.findOne({
+      email: input.email,
+    });
+    if (!user) {
+      throw new Error('User not found');
+    } else if (!verifyPassword(input.password, user.password)) {
+      throw new Error('Incorrect password');
+    }
+    // sign user
+    const token = signToken(user);
+    return {
+      user,
+      token,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   Query: {
     getUser,
@@ -37,6 +58,7 @@ module.exports = {
   },
   Mutation: {
     signUp,
+    login,
   },
   User: {
     expenses: async (user, _, ctx) => {

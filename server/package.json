@@ -24,6 +24,7 @@
    "dependencies": {
       "bcrypt": "^3.0.0",
       "class-validator": "^0.8.5",
+      "dotenv": "^6.0.0",
       "graphql-yoga": "^1.14.12",
       "jsonwebtoken": "^8.3.0",
       "lodash.merge": "^4.6.1",
