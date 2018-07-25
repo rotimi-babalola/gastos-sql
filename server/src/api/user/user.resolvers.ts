@@ -1,4 +1,5 @@
 import { validate } from 'class-validator';
+import expenseIndex from '../expense/expense.index';
 
 const getUser = async (_, { input }, ctx) => {
   const user = await ctx.models.user.findOne(input.id);
@@ -35,5 +36,13 @@ module.exports = {
   },
   Mutation: {
     createUser,
+  },
+  User: {
+    expenses: async (user, _, ctx) => {
+      const userExpenses = ctx.models.expense.find({
+        user: user.id,
+      });
+      return userExpenses;
+    },
   },
 };
