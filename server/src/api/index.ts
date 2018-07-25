@@ -8,10 +8,11 @@ export default {
     expense.typeDefs,
   ].join(' '),
   resolvers: merge({}, user.resolvers, expense.resolvers),
-  context: {
+  context: (req) => ({
+    ...req,
     models: {
       user: user.model.default,
       expense: expense.model.default,
     },
-  },
+  }),
 };

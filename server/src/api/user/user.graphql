@@ -23,5 +23,5 @@ type Query {
 }
 
 type Mutation {
-  createUser(input: NewUserInput!): User!
+  signUp(input: NewUserInput!): User!
 }

@@ -10,11 +10,12 @@ const getUser = async (_, { input }, ctx) => {
 };
 
 const getUsers = async (_, __, ctx) => {
+  console.log(ctx.request.headers, 'context');
   const users = await ctx.models.user.find({});
   return users;
 };
 
-const createUser = async (_, { input }, ctx) => {
+const signUp = async (_, { input }, ctx) => {
   const user = new ctx.models.user();
   user.username = input.username;
   user.password = input.password;
@@ -35,7 +36,7 @@ module.exports = {
     getUsers,
   },
   Mutation: {
-    createUser,
+    signUp,
   },
   User: {
     expenses: async (user, _, ctx) => {
