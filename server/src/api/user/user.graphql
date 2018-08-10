@@ -7,6 +7,11 @@ type User {
   expenses: [Expense]!
 }
 
+type AuthenticatedUserPayload {
+  user: User!
+  token: String!
+}
+
 input NewUserInput {
   username: String!
   password: String!
@@ -17,11 +22,17 @@ input UserID {
   id: ID!
 }
 
+input LoginUserInput {
+  email: String!
+  password: String!
+}
+
 type Query {
   getUser(input: UserID!): User!
   getUsers: [User]!
 }
 
 type Mutation {
-  createUser(input: NewUserInput!): User!
+  signUp(input: NewUserInput!): User!
+  login(input: LoginUserInput!): AuthenticatedUserPayload!
 }

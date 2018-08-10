@@ -1,5 +1,4 @@
 import { validate } from 'class-validator';
-import expenseIndex from '../expense/expense.index';
 
 const getUser = async (_, { input }, ctx) => {
   const user = await ctx.models.user.findOne(input.id);
@@ -10,11 +9,12 @@ const getUser = async (_, { input }, ctx) => {
 };
 
 const getUsers = async (_, __, ctx) => {
+  console.log(ctx.request.headers, 'context');
   const users = await ctx.models.user.find({});
   return users;
 };
 
-const createUser = async (_, { input }, ctx) => {
+const signUp = async (_, { input }, ctx) => {
   const user = new ctx.models.user();
   user.username = input.username;
   user.password = input.password;
@@ -29,13 +29,35 @@ const createUser = async (_, { input }, ctx) => {
   }
 };
 
+const login = async (_, { input }, ctx) => {
+  try {
+    const user = await ctx.models.user.findOne({
+      email: input.email,
+    });
+    if (!user) {
+      throw new Error('User not found');
+    } else if (!ctx.utils.verifyPassword(input.password, user.password)) {
+      throw new Error('Incorrect password');
+    }
+    // sign user
+    const token = ctx.utils.signToken(user);
+    return {
+      user,
+      token,
+    };
+  } catch (error) {
+    return error;
+  }
+};
+
 module.exports = {
   Query: {
     getUser,
     getUsers,
   },
   Mutation: {
-    createUser,
+    signUp,
+    login,
   },
   User: {
     expenses: async (user, _, ctx) => {
