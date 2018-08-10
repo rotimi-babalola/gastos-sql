@@ -1,5 +1,4 @@
 import { validate } from 'class-validator';
-import { verifyPassword, signToken } from '../../utils/login';
 
 const getUser = async (_, { input }, ctx) => {
   const user = await ctx.models.user.findOne(input.id);
@@ -37,11 +36,11 @@ const login = async (_, { input }, ctx) => {
     });
     if (!user) {
       throw new Error('User not found');
-    } else if (!verifyPassword(input.password, user.password)) {
+    } else if (!ctx.utils.verifyPassword(input.password, user.password)) {
       throw new Error('Incorrect password');
     }
     // sign user
-    const token = signToken(user);
+    const token = ctx.utils.signToken(user);
     return {
       user,
       token,
